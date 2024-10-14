@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(227, 255, 255);
+        }
+        .container{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        }
+        .container form input{
+           padding: 10px 20px;
+           margin: 10px 20px;
+           font-size: 1.5rem;
+           font-weight: lighter;
+           display: flex;
+           
+           flex-direction: column;
+           border: 1px solid rgb(52, 52, 52);
+           border-radius: 20px;
+        }
+        .container form{
+            display: flex;
+            flex-direction: column;
+        }
+        button{
+            padding: 10px 20px;
+           margin: 10px 20px;
+           font-size: 1.5rem;
+           font-weight: bold;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           flex-direction: column;
+           width: 100px;
+           border: 0;
+           color: white;
+           border-radius: 20px;
+           background-color: pink;
+        }
+        button:hover{
+            background-color: rgb(252, 158, 174);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style=" text-align: center;">hi ;) </h1>
+        <form name="submit-to-google-sheet">
+            <input type="text" name="name" placeholder="Enter Your Name" required>
+            <input type="email" name="email" placeholder="Enter Your Email" required>
+            <input type="text" name="text" placeholder="Email Your Message" required>
+            <button>send</button>
+        </form>
+    </div>
+      
+      <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxy9UHbL9GDtCerEiUT3Ehi6MYf8e1LlKUFefPEkz9AxfDLhgyYoXGY_EkgvxUNuG7JBQ/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+</body>
+</html>
